@@ -12,7 +12,6 @@
             --text-muted: #4a4a4a;
             --accent: #1a4fa0;
             --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.12);
-            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.18);
             --radius: 12px;
             --gap: 16px;
         }
@@ -45,7 +44,6 @@
             flex-direction: column;
         }
 
-        /* Галерея: на десктопе — сетка, на мобильном — стопка */
         .gallery-top {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -77,7 +75,6 @@
             grid-row: 2 / 3;
         }
 
-        /* Текстовый блок */
         .text-block {
             padding: 24px 20px 20px;
             color: var(--text-dark);
@@ -126,7 +123,6 @@
             color: var(--text-muted);
         }
 
-        /* Нижний блок */
         .bottom-block {
             position: relative;
             width: 100%;
@@ -160,7 +156,19 @@
             right: var(--gap);
         }
 
-        /* Мобильная адаптация (исправленная) */
+        /* Стили для сломанных картинок */
+        img[onerror] {
+            object-fit: contain;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px;
+        }
+
         @media (max-width: 480px) {
             body {
                 padding: 16px;
@@ -170,7 +178,6 @@
                 max-width: 100%;
             }
 
-            /* На мобильных галерея превращается в простую стопку картинок */
             .gallery-top {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
@@ -178,16 +185,14 @@
                 gap: var(--gap);
             }
 
-            /* Все картинки занимают всю ширину и имеют фиксированную высоту */
             .gallery-top .big,
             .gallery-top .small-top,
             .gallery-top .small-bottom {
                 grid-column: 1 / -1;
-                height: 220px; /* Увеличена высота, чтобы фото было заметнее */
+                height: 220px;
                 width: 100%;
             }
 
-            /* Текст идет строго после картинок */
             .text-block {
                 padding: 20px 16px;
                 font-size: 15px;
@@ -219,47 +224,31 @@
 <body>
 
 <div class="card">
-    <!-- ГАЛЕРЕЯ ТЕПЕРЬ ВЫШЕ ТЕКСТА -->
     <div class="gallery-top">
-        <img class="big" alt="Бассейн" loading="lazy" id="01a130d4-3af6-79fe-b7d5-9a8475e38b1d">
-        <img class="small-top" alt="Интерьер 1" loading="lazy" id="01a130d4-3afb-73d7-af38-0b8c60f3d7d0">
-        <img class="small-bottom" src="pool3.jpg" alt="Интерьер 2" loading="lazy">
+        <!-- Пути исправлены: все файлы в одной папке с index.html -->
+        <img class="big" src="pool1.jpg" alt="Бассейн" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg width%3D%22100%25%22 height%3D%22100%25%22 viewBox%3D%220 0 400 300%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 fill%3D%22%23f0f0f0%2F%2F%3E%3Ctext x%3D%2250%25%22 y%3D%2250%25%22 dominant-baseline%3D%22middle%22 text-anchor%3D%22middle%22 fill%3D%22%23888%22%3Epool1.jpg%3C%2Ftext%3E%3C%2Fsvg%3E';">
+       <img class="small-top" src="pool2.jpg" alt="Интерьер 1" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg width%3D%22100%25%22 height%3D%22100%25%22 viewBox%3D%220 0 400 300%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 fill%3D%22%23f0f0f0%2F%2F%3E%3Ctext x%3D%2250%25%22 y%3D%2250%25%22 dominant-baseline%3D%22middle%22 text-anchor%3D%22middle%22 fill%3D%22%23888%22%3Epool2.jpg%3C%2Ftext%3E%3C%2Fsvg%3E';">
+        <img class="small-bottom" src="pool3.jpg" alt="Интерьер 2" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg width%3D%22100%25%22 height%3D%22100%25%22 viewBox%3D%220 0 400 300%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 fill%3D%22%23f0f0f0%2F%2F%3E%3Ctext x%3D%2250%25%22 y%3D%2250%25%22 dominant-baseline%3D%22middle%22 text-anchor%3D%22middle%22 fill%3D%22%23888%22%3Epool3.jpg%3C%2Ftext%3E%3C%2Fsvg%3E';">
     </div>
 
-    <!-- Текстовый блок -->
     <div class="text-block">
         <p class="greeting">Дорогие друзья!</p>
-
-        <p class="greeting">
-            Приглашаю вас в спа-отель Солнечный на празднование моего юбилея. Теплый бассейн и множество саун ждут - не дождутся нашу компанию. Не забудьте купальник и тапочки для бассейна. И конечно, хорошее настроение.
+        <p class="greeting">Приглашаю вас в спа-отель Солнечный на празднование моего юбилея. Теплый бассейн и множество саун ждут - не дождутся нашу компанию. Не забудьте купальник и тапочки для бассейна. И конечно, хорошее настроение.</p>
+        <p class="greeting">Кроме этого в отеле есть бильярд, настольный теннис и боулинг. Можно гулять по территории и вкусно кушать в двух ресторанах. Вечером для нас будет живая музыка и танцы.</p>
+        <p class="address">Адрес отеля: Московская область, Солнечногорский район, с.п. Смирновское, д. Дулепово, Отель «Солнечный»<br>
+            <a href="https://yandex.ru/maps/-/CTt0aE-O" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
         </p>
-
-        <p class="greeting">
-            Кроме этого в отеле есть бильярд, настольный теннис и боулинг. Можно гулять по территории и вкусно кушать в двух ресторанах. Вечером для нас будет живая музыка и танцы.
-        </p>
-
-        <p class="address">
-            Адрес отеля: Московская область, Солнечногорский район, с.п. Смирновское, д. Дулепово, Отель «Солнечный»<br>
-            <a href="https://yandex.ru/maps/-/CTt0aE-O" target="_blank" rel="noopener">
-                Открыть в Яндекс.Картах
-            </a>
-        </p>
-
         <p class="details">
             <span>Дата заезда: 06 ноября 2026 : 16:00</span>
             <span>Дата выезда: 08 ноября 2026 : 12:00</span>
-            <a href="https://www.sunnyhotel.ru" target="_blank" rel="noopener">
-                Сайт отеля
-            </a>
+            <a href="https://www.sunnyhotel.ru" target="_blank" rel="noopener">Сайт отеля</a>
         </p>
-
     </div>
 
-    <!-- Нижний блок -->
     <div class="bottom-block">
-        <img class="main-img" alt="Бильярдный стол" loading="lazy" id="01a130d4-48a6-7917-baa1-e508f6fe31f7">
-        <img class="overlay overlay-left" alt="Угол 1" loading="lazy" id="01a130d4-4a9d-7982-9e24-515230062a2d">
-        <img class="overlay overlay-right" alt="Угол 2" loading="lazy" id="01a130d4-4a9a-7bd3-b432-0b6671fed5d9">
+        <img class="main-img" src="billiards.jpg" alt="Бильярдный стол" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg width%3D%22100%25%22 height%3D%22100%25%22 viewBox%3D%220 0 400 300%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 fill%3D%22%23f0f0f0%2F%2F%3E%3Ctext x%3D%2250%25%22 y%3D%2250%25%22 dominant-baseline%3D%22middle%22 text-anchor%3D%22middle%22 fill%3D%22%23888%22%3Ebilliards.jpg%3C%2Ftext%3E%3C%2Fsvg%3E';">
+        <img class="overlay overlay-left" src="billiards1.jpg" alt="Угол 1" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg width%3D%22100%25%22 height%3D%22100%25%22 viewBox%3D%220 0 400 300%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 fill%3D%22%23f0f0f0%2F%2F%3E%3Ctext x%3D%2250%25%22 y%3D%2250%25%22 dominant-baseline%3D%22middle%22 text-anchor%3D%22middle%22 fill%3D%22%23888%22%3Ebilliards1.jpg%3C%2Ftext%3E%3C%2Fsvg%3E';">
+        <img class="overlay overlay-right" src="billiards2.jpg" alt="Угол 2" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg width%3D%22100%25%22 height%3D%22100%25%22 viewBox%3D%220 0 400 300%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 fill%3D%22%23f0f0f0%2F%2F%3E%3Ctext x%3D%2250%25%22 y%3D%2250%25%22 dominant-baseline%3D%22middle%22 text-anchor%3D%22middle%22 fill%3D%22%23888%22%3Ebilliards2.jpg%3C%2Ftext%3E%3C%2Fsvg%3E';">
     </div>
 </div>
 
